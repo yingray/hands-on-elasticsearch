@@ -1,0 +1,90 @@
+GET /
+
+PUT /megacorp/employee/1
+{
+    "first_name" : "John",
+    "last_name" :  "Smith",
+    "age" :        25,
+    "about" :      "I love to go rock climbing",
+    "interests": [ "sports", "music" ]
+}
+
+PUT /megacorp/employee/2
+{
+    "first_name" :  "Jane",
+    "last_name" :   "Smith",
+    "age" :         32,
+    "about" :       "I like to collect rock albums",
+    "interests":  [ "music" ]
+}
+
+PUT /megacorp/employee/3
+{
+    "first_name" :  "Douglas",
+    "last_name" :   "Fir",
+    "age" :         35,
+    "about":        "I like to build cabinets",
+    "interests":  [ "forestry" ]
+}
+
+GET /megacorp/employee/_search
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "bool" : {
+            "must" : {
+                "match" : {
+                    "last_name" : "smith" 
+                }
+            },
+            "filter" : {
+                "range" : {
+                    "age" : { "gt" : 30 } 
+                }
+            }
+        }
+    }
+}
+
+GET /megacorp/employee/_search
+
+GET /megacorp/employee/_search
+{
+  "size": 0,
+  "query": {
+    "match": {
+      "last_name": "Smith"
+    }
+  },
+  "aggs": {
+    "average_of_age": {
+      "avg": {
+        "field": "age"
+      }
+    }
+  }
+}
+
+GET /megacorp/employee/_search
+{
+  "size": 0, 
+  "aggs": {
+    "all_interests": {
+      "terms": {
+        "field": "interests.keyword"
+      }
+    }
+  }
+}
+
+GET megacorp

@@ -1,0 +1,75 @@
+PUT http://localhost:9200/my_locations/_doc/1
+{
+  "pin": {
+    "name": "7-Eleven",
+    "location": {
+      "lat": 24.9840705,
+      "lon": 121.5399874
+    }
+  }
+}
+
+PUT /my_locations/_doc/2
+{
+  "pin": {
+    "name": "Mos burger",
+    "location": {
+      "lat": 24.9827922,
+      "lon": 121.5399175
+    }
+  }
+}
+
+PUT /my_locations/_doc/3
+{
+  "pin": {
+    "name": "DeepQ",
+    "location": {
+      "lat": 24.9841894,
+      "lon": 121.539891
+    }
+  }
+}
+
+GET my_locations
+
+DELETE my_locations
+
+PUT /my_locations
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "pin": {
+          "properties": {
+            "location": {
+              "type": "geo_point"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+GET my_locations/_search
+
+GET /my_locations/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      },
+      "filter": {
+        "geo_distance": {
+          "distance": "20m",
+          "pin.location": {
+            "lat": 24.9841894,
+            "lon": 121.539891
+          }
+        }
+      }
+    }
+  }
+}
