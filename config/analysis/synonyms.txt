@@ -1,0 +1,5 @@
+# synonyms.txt
+ipod, i-pod, i pod => ipod
+
+番茄, 西紅柿
+台大 => 台灣大學

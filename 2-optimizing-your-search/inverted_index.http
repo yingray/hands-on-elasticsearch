@@ -1,0 +1,18 @@
+PUT /ii_example/_doc/1
+{
+  "content": "The quick brown fox jumped over the lazy dog."
+}
+PUT /ii_example/_doc/2
+{
+  "content": "Quick brown foxes leap over lazy dogs in summer."
+}
+GET /ii_example/_doc/_search
+
+GET /ii_example/_doc/_search
+{
+  "query": {
+    "match": {
+      "content": "a lazy dog"
+    }
+  }
+}
